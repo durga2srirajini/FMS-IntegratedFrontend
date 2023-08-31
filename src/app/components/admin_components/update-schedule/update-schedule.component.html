@@ -1,0 +1,111 @@
+<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        &nbsp;
+        <li class="nav-item ">
+          <button class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/viewflights">View Flights</button>
+      </li>
+      &nbsp;
+      <li class="nav-item ">
+        <button class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/adminHome">Admin Home</button>
+    </li>
+      </ul> 
+    </div>
+</nav> -->
+
+
+<div style="font-family: cursive; font-size: xx-large; 
+    color: rgb(15, 1, 1); padding-top: 1%; text-align: center;">
+    UPDATE SCHEDULE</div>
+
+<div class="background">
+    <div class="container" id="form-wrapper">
+      <form style="margin-top: 3%; padding-left: 15%; padding-right: 15%;">
+        
+        <div class="form-group row">
+            <label for="scheduleId" class="col-sm-2 col-form-label">Schedule Id</label>
+            <div class="col-sm-10">
+              <input type="number" name="scheduleId" class="form-control" [(ngModel)]="scheduleFlight.scheduleId" readonly>
+            </div>
+        </div>  
+    
+        <div class="form-group row">
+            <label for="flightId" class="col-sm-2 col-form-label">Flight number</label>
+            <div class="col-sm-10">
+              <input type="number" name="flightId" class="form-control" [(ngModel)]="scheduleFlight.flightId" readonly>
+            </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="sourceAirport" class="col-sm-2 col-form-label">Scource Airport</label>
+          <div class="col-sm-10">
+            <select name="sourceAirport" class="form-control" [(ngModel)]="scheduleFlight.sourceAirport" #sourceRef="ngModel" pattern="^[A-Za-z -]+$" required>
+              <option selected>Choose...</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Pune">Pune</option>
+              <option value="Kochi">Kochi</option>
+              <option value="Vizag">Vizag</option>
+            </select>
+          </div>
+          <div *ngIf="sourceRef.invalid && (sourceRef.dirty || sourceRef.touched)"  style="padding-left: 18%; padding-right: 1%;">
+            <div *ngIf="sourceRef.errors?.['required']" class="text text-danger">Select one.....</div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="scheduleId" class="col-sm-2 col-form-label">Destination Airport</label>
+          <div class="col-sm-10">
+            <select name="destinationAirport" class="form-control" [(ngModel)]="scheduleFlight.destinationAirport" #destinationRef="ngModel" pattern="^[A-Za-z -]+$" required>
+              <option selected>Choose...</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Pune">Pune</option>
+              <option value="Kochi">Kochi</option>
+              <option value="Vizag">Vizag</option>
+            </select>
+          </div>
+          <div *ngIf="destinationRef.invalid && (destinationRef.dirty || destinationRef.touched)"  style="padding-left: 18%; padding-right: 1%;">
+            <div *ngIf="destinationRef.errors?.['required']" class="text text-danger">Select one.....</div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="departureTime" class="col-sm-2 col-form-label">Departure Time</label>
+          <div class="col-sm-10">
+            <input type="datetime-local" name="departureTime" class="form-control" [(ngModel)]="scheduleFlight.departureTime" #departureRef="ngModel">
+          </div>
+          <div *ngIf="departureRef.invalid && (departureRef.dirty || departureRef.touched)"  style="padding-left: 18%; padding-right: 1%;">
+            <div *ngIf="departureRef.errors?.['required']" class="text text-danger">Select Deparutre Time</div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="arrivalTime" class="col-sm-2 col-form-label">Arrival Time</label>
+          <div class="col-sm-10">
+            <input type="datetime-local" name="arrivalTime" class="form-control" [(ngModel)]="scheduleFlight.arrivalTime" #arrivalRef="ngModel">
+          </div>
+          <div *ngIf="arrivalRef.invalid && (arrivalRef.dirty || arrivalRef.touched)"  style="padding-left: 18%; padding-right: 1%;">
+            <div *ngIf="arrivalRef.errors?.['required']" class="text text-danger">Select Arrival Time.</div>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label for="price" class="col-sm-2 col-form-label">Price</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" name="price" [(ngModel)]="scheduleFlight.price" #priceRef="ngModel">
+          </div>
+          <div *ngIf="priceRef.invalid && (priceRef.dirty || priceRef.touched)"  style="padding-left: 18%; padding-right: 1%;">
+            <div *ngIf="priceRef.errors?.['required']" class="text text-danger">.....Add Price.....</div>
+          </div>
+        </div>
+        <div style="padding-left: 18%; padding-right: 1%;">
+          <button type="submit" class="btn btn-primary btn-sm btn-block" (click)="uploadData()">Confirm</button>
+          <button type="submit" class="btn btn-danger btn-sm btn-block" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>

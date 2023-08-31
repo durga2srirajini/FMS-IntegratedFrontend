@@ -1,0 +1,11 @@
+.bg-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-position: center;
+    background-image: url("/assets/User Flight.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

@@ -1,0 +1,65 @@
+.bg-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-header {
+    background-color: rgb(189, 179, 179);
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: rgb(7, 146, 246);
+    text-align: center;
+}
+
+.card {
+    border: 1px solid rgb(176, 169, 169);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 720px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #fff;
+    font-size: 16px;
+}
+
+.schedule {
+    margin-bottom: 20px;
+    /* Add spacing between schedules */
+    overflow: auto;
+    /* Clear any floated elements inside */
+}
+
+.time-container {
+    overflow: hidden;
+    /* Clear floats */
+}
+
+.float_left {
+    float: left;
+}
+
+.float_right {
+    float: right;
+}
+
+.price-container {
+    clear: both;
+}
+
+.button-container {
+    text-align: right;
+}
+
+.arrow {
+    font-weight: bold; /* Increase the boldness */
+    padding: 0 10px; /* Increase the width by adding padding */
+    font-size: 20px; /* Adjust the font size as needed */
+}
+
+  

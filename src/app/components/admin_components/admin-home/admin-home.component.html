@@ -1,0 +1,181 @@
+<!-- 
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="container-fluid">
+  
+      <ul class="navbar-nav">
+  
+        &nbsp;
+  
+        <li class="nav-item">
+  
+          <i class="fa fa-plane fa-spin fa-2x" style="color: white; "></i>
+  
+        </li>
+  
+        &nbsp;&nbsp;&nbsp;
+  
+        <li class="nav-item ">
+          <button class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/adminHome">Admin Home</button>
+      </li>
+  
+      </ul>
+  
+      <ul class="navbar-nav ">
+  
+        <li class="nav-item active">
+  
+          <a class="nav-link" href="#">
+  
+            <i class="fa fa-user-circle fa-2x" style="color: white; "></i>
+  
+          </a>
+  
+        </li>
+  
+      </ul>
+  
+    </div>
+  
+  </nav> -->
+
+<div class="bg-image" style="background-image: url('../assets/flight.png'); height: 100vh; ">
+  <div class="row">
+    <div class="column" style="padding-right: 10%; padding-left: 10%; padding-top: 10%;">
+      <div class="card">
+        <strong>
+          <h3>Flights</h3>
+        </strong>
+        <br>
+        <button class="btn btn-success my-2 my-sm-0" type="button" (click)="newForm()">Add Flight</button>
+        <br>
+        <button class="btn btn-success my-2 my-sm-0" type="button" (click)="viewForm()"
+          routerlink="/scheduledFlights">View Flights</button>
+      </div>
+    </div>
+    <div class="column" style="padding-right: 10%; padding-left: 10%; padding-top: 10%;">
+      <div class="card">
+        <h3>Airports</h3>
+        <br>
+        <button class="btn btn-success my-2 my-sm-0" type="button" (click)="newAirportForm()">Add Airport</button>
+        <br>
+        <button class="btn btn-success my-2 my-sm-0" type="button" (click)="viewAllAirports()">View Airports</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New Form -->
+<div class="formwrapper" *ngIf="showForm">
+  <div class="flightform">
+    <h2 class="text-center text-dark head">{{formHeader}}</h2>
+    <br>
+    <div class="group">
+      <label for="carriername">Carrier Name</label><br>
+      <input type="text" class="form-control" [(ngModel)]="flight.carrierName" #carrierRef="ngModel" name="carriername"
+        placeholder="Enter Flight Carrier Name Here" required>
+      <div *ngIf="carrierRef.invalid && (carrierRef.dirty || carrierRef.touched)">
+        <div *ngIf="carrierRef.errors?.['required']" class="text text-danger">Carrier Name is required.</div>
+      </div>
+    </div>
+
+    <div class="group">
+      <label for="flightmodel">Flight Model</label><br>
+      <input type="text" class="form-control" [(ngModel)]="flight.flightModel" #flightModelRef="ngModel"
+        name="flightmodel" placeholder="Enter Flight Model Here" required>
+      <div *ngIf="flightModelRef.invalid && (flightModelRef.dirty || flightModelRef.touched)">
+        <div *ngIf="flightModelRef.errors?.['required']" class="text text-danger">Flight Model is required.</div>
+      </div>
+    </div>
+
+    <div class="group">
+      <label for="seatcapacity">Seat Capacity</label><br>
+      <input type="number" class="form-control" [(ngModel)]="flight.seatCapacity" #capacityRef="ngModel"
+        name="seatcapacity" placeholder="Enter Seat Capacity Here" required>
+      <div *ngIf="capacityRef.invalid && (capacityRef.dirty || capacityRef.touched)">
+        <div *ngIf="capacityRef.errors?.['required']" class="text text-danger">Flight Model is required.</div>
+      </div>
+    </div>
+    <div class="action">
+      <button class="btn btn-primary save" type="button" (click)="saveFlight()">Save Flight</button>
+      <div *ngIf="addMsg">
+        <p class="alert alert-success">{{addMsg}}</p>
+      </div>
+      <div *ngIf="errorMsg">
+        <p class="alert alert-danger">{{errorMsg}}</p>
+      </div>
+      <button class="btn btn-danger save" type="button" (click)="closeForm()">Cancel</button>
+    </div>
+  </div>
+
+<!-- airport form  -->
+</div>
+<div class="formwrapper" *ngIf="showAirportForm">
+  <div class="airportform">
+    <h2 class="text-center text-dark head">{{formHeading}}</h2>
+    <br>
+    <div class="group">
+      <label for="AirportName">Airport Name</label><br>
+      <input type="text" pattern="^[a-zA-Z '-]*$" class="form-control" [(ngModel)]="newAirport.airportName"
+        #airportRef="ngModel" name="airportName" placeholder="Enter Airport name here" required>
+      <div *ngIf="airportRef.invalid && (airportRef.dirty || airportRef.touched)">
+        <div *ngIf="airportRef.errors?.['required']" class="text text-danger">Airport Name is required.</div>
+        <div *ngIf="airportRef.errors?.['pattern']" class="text text-danger">Name must be of 5 characters and special
+          characters are not allowed.</div>
+      </div>
+    </div>
+
+    <div class="group">
+      <label for="airportLocation">Location</label><br>
+      <input type="text" pattern="[a-zA-Z '-]*$" class="form-control" [(ngModel)]="newAirport.airportLocation"
+        #airportLocationRef="ngModel" name="airportLocation" placeholder="Enter the location Here" required>
+      <div *ngIf="airportLocationRef.invalid && (airportLocationRef.dirty || airportRef.touched)">
+        <div *ngIf="airportLocationRef.errors?.['required']" class="text text-danger">Location is required.</div>
+        <div *ngIf="airportLocationRef.errors?.['pattern']" class="text text-danger">Location must be of 3 characters
+          and special characters are not allowes.</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <button class="btn btn-primary save" type="button" (click)="saveAirport()">Save Airport</button>
+      <div *ngIf="addMsg">
+        <p class="alert alert-success">{{addMsg}}</p>
+      </div>
+      <div *ngIf="errorMsg">
+        <p class="alert alert-danger">{{errorMsg}}</p>
+      </div>
+      <button class="btn btn-danger save" type="button" (click)="closeForm()">Cancel</button>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+      <!-- Google -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+      <!-- Linkedin -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+      <!-- Github -->
+      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+    </section>
+    <section class="mb-4">
+      <p>
+        Flight Service Application made with Angular and Springboot
+      </p>
+    </section>
+  </div>
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2023 Copyright:
+    <a class="text-white">Capgemini</a>
+  </div>
+</footer>

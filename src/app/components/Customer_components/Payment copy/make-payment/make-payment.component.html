@@ -1,0 +1,100 @@
+<div class="bg-image">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="total-amount">Total amount</h5>
+                    <div class="amount-container">
+                        <span class="amount-text"><span class="dollar-sign">Rs. </span>{{bookingDTO.ticketCost}}</span>
+                    </div>
+                </div>
+      
+                <div class="form-group">
+                    <label for="paymentType">Payment mode</label>
+                    <select class="form-control" placeholder="--select--" id="paymentType"  [(ngModel)]="selectedPaymentType">
+                        <option value="CARD">CARD</option>
+                        <option value="UPI">UPI</option>
+                    </select>
+                </div>
+      
+                <!-- UPI Payment Form -->
+                <div *ngIf="selectedPaymentType === 'UPI'">
+                    <div class="form-group">
+                        <label for="upi">UPI:</label>
+                        <input type="text" class="form-control" placeholder="Enter mobileNumber"
+                            [(ngModel)]="upi.mobileNumber" #upiIdRef="ngModel" pattern="[0-9]{10}" required>
+                        <div *ngIf="upiIdRef.invalid && (upiIdRef.dirty || upiIdRef.touched)">
+                            <div *ngIf="upiIdRef.errors?.['required']" class="alert alert-danger">mobile Number is required.</div>
+                            <div *ngIf="upiIdRef.errors?.['pattern']" class="alert alert-danger">mobile number must be of 10 char and contain only numbers.</div>
+                        </div>
+                    </div>
+                
+                    <!-- UPI PIN -->
+                    <div class="form-group">
+                        <label for="upiPin">UPI PIN:</label>
+                        <input type="password" class="form-control" placeholder="Enter UPI PIN"
+                            [(ngModel)]="upi.pin" #upiPinRef="ngModel" pattern="[0-9]{3}" required>
+                        <div *ngIf="upiPinRef.invalid && (upiPinRef.dirty || upiPinRef.touched)">
+                            <div *ngIf="upiPinRef.errors?.['required']" class="alert alert-danger">UPI PIN is required.</div>
+                            <div *ngIf="upiPinRef.errors?.['pattern']" class="alert alert-danger">UPI PIN must be a 3-digit number.</div>
+                        </div>
+                    </div>
+                </div>
+      
+                <!-- Card Payment Form -->
+                <div *ngIf="selectedPaymentType === 'CARD'">
+                    <div class="form-group">
+                        <label for="cardName">Card Holder Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter Card Holder Name"
+                            [(ngModel)]="card.name" #cardNameRef="ngModel" pattern="^[A-Za-z\s]{3,12}$" required>
+                        <div *ngIf="cardNameRef.invalid && (cardNameRef.dirty || cardNameRef.touched)">
+                            <div *ngIf="cardNameRef.errors?.['required']" class="alert alert-danger">Card name is required.</div>
+                            <div *ngIf="cardNameRef.errors?.['pattern']" class="alert alert-danger">Only alphabets are allowed.</div>
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" class="form-control" placeholder="Enter Card Number"
+                            [(ngModel)]="card.cardNo" #cardNoRef="ngModel" pattern="[0-9]{10,14}" required>
+                        <div *ngIf="cardNoRef.invalid && (cardNoRef.dirty || cardNoRef.touched)">
+                            <div *ngIf="cardNoRef.errors?.['required']" class="alert alert-danger">Card number is required.</div>
+                            <div *ngIf="cardNoRef.errors?.['pattern']" class="alert alert-danger">Card number must be 10 to 14 digits.</div>
+                        </div>
+                    </div>
+      
+                    <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="password" class="form-control" placeholder="Enter CVV"
+                            [(ngModel)]="card.cvv" #cvvRef="ngModel" pattern="[0-9]{3}" required>
+                        <div *ngIf="cvvRef.invalid && (cvvRef.dirty || cvvRef.touched)">
+                            <div *ngIf="cvvRef.errors?.['required']" class="alert alert-danger">CVV is required.</div>
+                            <div *ngIf="cvvRef.errors?.['pattern']" class="alert alert-danger">CVV must be a 3-digit number.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Status -->
+                <div class="form-group">
+                    <label for="paymentStatus" >Payment Status:</label>
+                    <input class="form-control" type="text" disabled value="{{status}}">
+                </div>
+            </div>
+            <!-- Make Payment Button -->
+            <div class="d-flex justify-content-center pt-3">
+                <button type="button" class="btn btn-primary" (click)="makePayment()">Make Payment</button>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+                    
+      
+    
+

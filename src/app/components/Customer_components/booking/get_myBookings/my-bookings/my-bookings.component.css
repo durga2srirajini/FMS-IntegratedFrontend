@@ -1,0 +1,34 @@
+.inline{
+    display: inline;
+}
+
+.row{
+  
+    font-size: 14px;
+}
+.card-body{
+    border-style:  ridge;
+    border-radius: 5px 20px 10px;
+  }
+
+  .a {
+    color: green;
+    text-decoration-thickness:  5px;
+  }
+
+  .b{
+    color: red;
+    text-decoration-thickness:  5px;
+  }
+
+  .align-right-button {
+    float: right;
+}
+
+#redunded{
+   color:green
+}
+
+#not_refunded{
+color:yellowgreen
+}

@@ -1,0 +1,32 @@
+<div class="bg-image">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2>Payment Details</h2>
+    </div>
+    <ng-container *ngIf="payment; else noPayment">
+      <div class="card-body">
+        <p><strong>Booking ID: </strong>{{ payment.bookingId }}</p>
+        <p><strong>Payment ID: </strong>{{ payment.paymentId }}</p>
+        <p><strong>Transaction ID:</strong> {{ payment.txId }}</p>
+        <p><strong>Payment Type: </strong>{{ payment.type }}</p>
+        <p><strong>Total Amount: </strong>{{ payment.amount | currency:'Rs. ':'symbol':'1.2-2' }}</p>
+        <p><strong>Payment Status: </strong>{{ payment.status }}</p>
+      </div>
+    </ng-container>
+    <ng-template #noPayment>
+      <div class="card-body">
+        <div class="alert alert-info" role="alert">
+          No payment details available.
+        </div>
+      </div>
+    </ng-template>
+    <div class="card-footer text-center">
+      <div *ngIf="msg">
+        <p class="alert alert-success">{{ msg }}</p>
+      </div>
+      <div *ngIf="errorMsg">
+        <p class="alert alert-danger">{{ errorMsg }}</p>
+      </div>
+    </div>
+  </div>
+</div>

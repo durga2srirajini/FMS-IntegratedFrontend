@@ -1,0 +1,8 @@
+.card-header{
+    background-color: rgb(250, 250, 250);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: rgb(7, 146, 246);
+}

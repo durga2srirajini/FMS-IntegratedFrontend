@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!security.isAdmin()">
+      &nbsp;
+      <li class="nav-item">
+        <i class="fa fa-plane fa-spin fa-2x" style="color: white; "></i>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" type="submit" (click)="scheduledFlights()">View Flights</button>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" routerLink="getMyBookings" type="submit">My Bookings</button>
+      </li>
+    </ul>
+
+    <!-- admin related tabs -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="security.isAdmin()">
+      &nbsp;
+      <li class="nav-item">
+        <i class="fa fa-plane fa-spin fa-2x" style="color: white; "></i>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" routerLink="/adminHome">Admin Home</button>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" routerLink="/viewflights">View Flights</button>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" routerLink="/viewAirports">View Airports</button>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" routerLink="/getAllPayments" type="submit">View Payments</button>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <button class="btn btn-success my-2 my-sm-0" routerLink="/getBookings" type="submit">Bookings</button>
+      </li>
+    </ul>
+
+    <div class="dropdown " *ngIf="security.isLoggedIn |async">
+      <a class="dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar" role="button"
+        data-bs-toggle="dropdown" data-mdb-toggle="dropdown" aria-expanded="false">
+        <img src="assets/profile image.png"
+          class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy" />
+      </a>
+      <!-- drop down items -->
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+        <li>
+          <a class="dropdown-item" routerLink="/updateCustomer">My profile</a>
+        </li>
+        <li>
+          <a class="dropdown-item" *ngIf="security.isAdmin()" routerLink="/addAdmin">Add Admin</a>
+        </li>
+        <li>
+          <a class="dropdown-item" *ngIf="!security.isAdmin()" routerLink="/customerHome">Home</a>
+        </li>
+        <li>
+          <a class="dropdown-item btn-danger" id="logout" routerLink="/login" (click)="security.logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,141 @@
+
+
+.bg-image {
+
+    background-repeat: no-repeat;
+
+    background-size: 100% 100%;
+
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+ 
+
+.card {
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    padding: 50px;
+
+    text-align: center;
+
+    background-color: #f3eaea;
+
+ 
+
+}
+
+ 
+
+.column {
+
+    float: left;
+
+    width: 50%;
+
+    padding: 0 10px;
+
+}
+
+ 
+
+.formwrapper{
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100%;
+
+    width: 100%;
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0);
+
+    z-index: 100;
+
+}
+
+ 
+
+.flightform{
+
+    background-color: rgb(169, 180, 183);
+
+    width: 50%;
+
+    padding: 10px 40px;
+
+    border-radius: 5px;
+
+}
+
+.airportform{
+
+    background-color: rgb(169, 180, 183);
+
+    width: 50%;
+
+    padding: 10px 40px;
+
+    border-radius: 5px;
+
+}
+
+ 
+
+.group{
+
+   
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+ 
+
+.action{
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 50px;
+
+    margin: 20px;
+
+}
+
+ 
+
+ 
+
+.btn-primary{
+
+    background-color: black;
+
+    color: white;
+
+}
+
+ 
+
+ 
+
+.save{
+
+    background-color: #0d0b0b;
+
+    color: white;
+
+}
+
+ 

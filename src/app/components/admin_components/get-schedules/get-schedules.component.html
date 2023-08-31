@@ -1,0 +1,55 @@
+<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        &nbsp;
+        <li class="nav-item ">
+          <button class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/viewflights">View Flights</button>
+      </li>
+      &nbsp;
+      <li class="nav-item ">
+        <button class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/adminHome">Admin Home</button>
+    </li>
+      </ul> 
+    </div>
+</nav> -->
+
+<div class="card">
+    <div class="card-header">
+        <div style="font-family: cursive; font-size: x-large; color: rgb(15, 1, 1);">LIST OF ALL SCHEDULES</div>
+        <div><button class="btn btn-primary" (click)="openAddScheduleForm()">Add</button></div>
+    </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="text-center">
+                    <tr>
+                        <th>SID</th>
+                        <th>FID</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Time</th>
+                        <th>Price</th>
+                        
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr *ngFor="let schedule of schedules">
+                        <td>{{schedule.scheduleId}}</td>
+                        <td>{{schedule.flightId}}</td>
+                        <td>{{schedule.sourceAirport}}</td>
+                        <td>{{schedule.destinationAirport}}</td>
+                        <td>{{schedule.departureTime}}</td>
+                        <td>{{schedule.arrivalTime}}</td>
+                        <td>{{schedule.price}}</td>
+                        <td><button class="btn btn-primary" (click)="modifySchedule(schedule)">Edit</button></td>
+                        <td><button class="btn btn-danger" (click)="cancelSchedule(schedule.scheduleId)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        
+        </div>
+    
+</div>

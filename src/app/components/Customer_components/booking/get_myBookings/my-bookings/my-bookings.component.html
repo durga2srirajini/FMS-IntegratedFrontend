@@ -1,0 +1,294 @@
+
+<section style="background-color: #eee;">
+
+  <div class="container py-5 ">
+
+    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+
+      <div class="input-group">
+
+        <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1"
+
+          [(ngModel)]="query" class="form-control border-0 bg-light">
+
+        <div class="input-group-append">
+
+          <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+
+              class="fa fa-search"></i></button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+ 
+
+    <div *ngIf="bookings.length == 0">
+
+      <p class="alert alert-info">Sorry no bookings available to display.</p>
+
+    </div>
+
+    <div class="row justify-content-center mb-3" *ngFor="let booking of bookings|search:query as result">
+
+      <div class="col-md-12 col-xl-10" *ngFor="let schedule of getFlightDetails(booking.sheduleId)">
+
+        <div class="card shadow-0 border rounded-3">
+
+          <div class="card-body">
+
+            <div class="row">
+
+              <div class="col-md-12 col-lg-2 col-xl-3  mb-4 mb-lg-0">
+
+                <div class="bg-image hover-zoom ripple rounded ripple-surface">
+
+ 
+
+                  <!-- *ngIf="flight=== 'Indigo'" -->
+
+                  <img src="assets\indigo_anim_main_1480x800.jpg" class="w-100" />
+
+                  <!--
+
+                      *ngIf="flight=== 'American'"
+
+                      <img
+
+                      src="assets\AA.jpg"
+
+                      class="w-100" />
+
+                      *ngIf="flight=== 'Spicejet'"
+
+                      <img
+
+                      src="assets\spicejet-feature.webp"
+
+                      class="w-100" />
+
+                      *ngIf="flight=== 'Emirates'"
+
+                      <img
+
+                      src="assets\emirates.jpg"
+
+                      class="w-100" /> -->
+
+             
+
+ 
+
+                    <a href="#!">
+
+                      <div class="hover-overlay">
+
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+
+                      </div>
+
+                    </a>
+
+                  </div>
+
+ 
+
+                  <!-- *ngIf="security.isUser()" -->
+
+                  <div class="d-flex flex-column mt-4">
+
+                    <button class="btn btn-outline-primary" *ngIf="booking.bookingStatus !== 'CANCELLED'" type="button"
+
+                      (click)="updateBooking(booking)">
+
+                      Update details
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+ 
+
+ 
+
+                &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+
+                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+
+                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+                BookingId: {{booking.bookingId}} &nbsp;&nbsp; BookingDate: {{booking.bookingDate}}
+
+                <br><br>
+
+                &nbsp;&nbsp; Flight Name:INDIGO
+
+                <br>
+
+             
+
+                &nbsp;&nbsp; Arrival time: {{schedule.arrivalTime}}
+
+                &nbsp;&nbsp; Departure time: {{schedule.departureTime}}
+
+                <br>
+
+               
+
+                &nbsp;&nbsp; From {{schedule.sourceAirport}}  To  {{schedule.destinationAirport}}
+
+ 
+
+ 
+
+                <h2></h2>
+
+ 
+
+                <div *ngIf="booking.bookingStatus === 'BOOKED'">
+
+                  <h3 class="a">&nbsp;&nbsp; <b>Status: {{booking.bookingStatus}} </b></h3>
+
+                </div>
+
+                <div *ngIf="booking.bookingStatus === 'CANCELLED'">
+
+                  <h3 class="b">&nbsp;&nbsp; <b>Status: {{booking.bookingStatus}} </b></h3>
+
+                </div>
+
+ 
+
+                <div class="inline">
+
+                  UserId:user
+
+                  {{booking.userId}}
+
+                </div>
+
+ 
+
+              </div>
+
+ 
+
+              <div class="row">
+
+ 
+
+                <div class="col-md-6 col-lg-6 col-xl-6" *ngFor="let passenger of booking.passengerList">
+
+ 
+
+                  <br>
+
+                  <h4>Passenger:</h4>
+
+ 
+
+                  <div class="d-flex flex-row">
+
+ 
+
+                    <h3>ID:{{passenger.passengerId}} &nbsp; Name: {{passenger.passengerName}} &nbsp;
+
+                      Gender:{{passenger.gender}} <br>
+
+                      Age:{{passenger.passengerAge}} &nbsp;&nbsp; UID:{{passenger.uid}} &nbsp;&nbsp;
+
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                      <div class="inline">
+
+                        <button type="button" class="btn btn-outline-danger"
+
+                          *ngIf="booking.bookingStatus !== 'CANCELLED'"
+
+                          (click)="removePassenger1(passenger.passengerId,booking)">Cancel</button>
+
+                      </div>
+
+                    </h3>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <br>
+
+              <h1 style="text-align:right;">Fare: {{booking.ticketCost}}</h1>
+
+              <div class="inline">
+
+                {{booking.contactNo}}
+
+                <div class="align-right-button">
+
+                  <!-- <div  *ngIf="booking.bookingStatus !== 'CANCELLED'" >
+
+              <strong><p id="redunded" *ngIf="payment">Payment refunded</p></strong>
+
+              <strong><p id="not_refunded"  *ngIf="payment">Payment  will be refunded</p></strong>
+
+            </div> -->
+
+                  <button type="button" *ngIf="booking.bookingStatus !== 'CANCELLED'" class="btn btn-outline-danger"
+
+                    (click)="cancelBooking1(booking.bookingId)">Cancel Booking</button>
+
+                  <br>
+                  <br>
+                  
+                  <button type="submit" (click)="ViewPayment(booking.bookingId)" class="btn btn-outline-primary">View Payment Details</button>
+
+                  <br>
+                  <br>
+
+                  <button class="btn btn-success" *ngIf="booking.bookingStatus !== 'CANCELLED'" (click)="generateImage()">Download Ticket</button>
+
+                  <br>
+           
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+ 
+
+      </div>
+
+ 
+
+      <div *ngIf="addMsg2">
+
+        <p class="alert alert-success">{{addMsg2}}</p>
+
+      </div>
+
+      <div *ngIf="errorMsg2">
+
+        <p class="alert alert-danger">{{errorMsg2}}</p>
+
+      </div>
+
+    </div>
+
+</section>
